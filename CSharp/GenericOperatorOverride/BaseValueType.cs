@@ -113,6 +113,11 @@ namespace Janyee.Utilty {
 	public class Integer : BaseValueType {
 		public Integer(object value = null) : base(value) { }
 
+		/******************************** unary operators overloaded ********************************/
+
+
+		#region unary operators overloaded
+
 		public static int operator +(Integer left, Integer right) {
 			if (left._value is int l) {
 				if (right._value is int r) {
@@ -126,10 +131,148 @@ namespace Janyee.Utilty {
 				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
 			}
 		}
+
+		public static int operator -(Integer left, Integer right) {
+			if (left._value is int l) {
+				if (right._value is int r) {
+					return l - r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static int operator *(Integer left, Integer right) {
+			if (left._value is int l) {
+				if (right._value is int r) {
+					return l * r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static int operator /(Integer left, Integer right) {
+			if (left._value is int l) {
+				if (right._value is int r) {
+					return l / r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static int operator %(Integer left, Integer right) {
+			if (left._value is int l) {
+				if (right._value is int r) {
+					return l % r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
+	}
+
+	public class Float : BaseValueType {
+		public Float(object value = null) : base(value) { }
+
+		#region unary operators overloaded
+
+		public static float operator +(Float left,Float right) {
+			if (left._value is float l) {
+				if (right._value is float r) {
+					return l + r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static float operator -(Float left, Float right) {
+			if (left._value is float l) {
+				if (right._value is float r) {
+					return l - r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static float operator *(Float left, Float right) {
+			if (left._value is float l) {
+				if (right._value is float r) {
+					return l * r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static float operator /(Float left, Float right) {
+			if (left._value is float l) {
+				if (right._value is float r) {
+					return l / r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static float operator %(Float left, Float right) {
+			if (left._value is float l) {
+				if (right._value is float r) {
+					return l % r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
 	}
 
 	public class Double : BaseValueType {
 		public Double(object value = null) : base(value) { }
+
+		#region unary operators overloaded
 
 		public static double operator +(Double left, Double right) {
 			if (left._value is double l) {
@@ -144,10 +287,70 @@ namespace Janyee.Utilty {
 				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
 			}
 		}
+
+		public static double operator -(Double left, Double right) {
+			if (left._value is double l) {
+				if (right._value is double r) {
+					return l - r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static double operator *(Double left, Double right) {
+			if (left._value is double l) {
+				if (right._value is double r) {
+					return l * r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static double operator /(Double left, Double right) {
+			if (left._value is double l) {
+				if (right._value is double r) {
+					return l / r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static double operator %(Double left, Double right) {
+			if (left._value is double l) {
+				if (right._value is double r) {
+					return l % r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
 	}
 
 	public class Decimal : BaseValueType {
 		public Decimal(object value = null) : base(value) { }
+
+		#region unary operators overloaded
 
 		public static decimal operator +(Decimal left, Decimal right) {
 			if (left._value is decimal l) {
@@ -162,5 +365,63 @@ namespace Janyee.Utilty {
 				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
 			}
 		}
+
+		public static decimal operator -(Decimal left, Decimal right) {
+			if (left._value is decimal l) {
+				if (right._value is decimal r) {
+					return l - r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static decimal operator *(Decimal left, Decimal right) {
+			if (left._value is decimal l) {
+				if (right._value is decimal r) {
+					return l * r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static decimal operator /(Decimal left, Decimal right) {
+			if (left._value is decimal l) {
+				if (right._value is decimal r) {
+					return l / r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static decimal operator %(Decimal left, Decimal right) {
+			if (left._value is decimal l) {
+				if (right._value is decimal r) {
+					return l % r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
 	}
 }

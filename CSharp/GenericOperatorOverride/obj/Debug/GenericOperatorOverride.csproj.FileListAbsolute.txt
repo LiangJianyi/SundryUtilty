@@ -4,3 +4,9 @@ C:\Users\a124p\source\repos\Temp\GenericOperatorOverride\bin\Debug\GenericOperat
 C:\Users\a124p\source\repos\Temp\GenericOperatorOverride\bin\Debug\GenericOperatorOverride.pdb
 C:\Users\a124p\source\repos\Temp\GenericOperatorOverride\obj\Debug\GenericOperatorOverride.dll
 C:\Users\a124p\source\repos\Temp\GenericOperatorOverride\obj\Debug\GenericOperatorOverride.pdb
+C:\Users\a124p\Documents\GitHub\SundryUtilty\CSharp\GenericOperatorOverride\bin\Debug\GenericOperatorOverride.dll
+C:\Users\a124p\Documents\GitHub\SundryUtilty\CSharp\GenericOperatorOverride\bin\Debug\GenericOperatorOverride.pdb
+C:\Users\a124p\Documents\GitHub\SundryUtilty\CSharp\GenericOperatorOverride\obj\Debug\GenericOperatorOverride.csprojAssemblyReference.cache
+C:\Users\a124p\Documents\GitHub\SundryUtilty\CSharp\GenericOperatorOverride\obj\Debug\GenericOperatorOverride.csproj.CoreCompileInputs.cache
+C:\Users\a124p\Documents\GitHub\SundryUtilty\CSharp\GenericOperatorOverride\obj\Debug\GenericOperatorOverride.dll
+C:\Users\a124p\Documents\GitHub\SundryUtilty\CSharp\GenericOperatorOverride\obj\Debug\GenericOperatorOverride.pdb
