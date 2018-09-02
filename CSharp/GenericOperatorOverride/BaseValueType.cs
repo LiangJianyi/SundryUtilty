@@ -2,6 +2,12 @@
 using System.Numerics;
 
 namespace Janyee.Utilty {
+	internal static class ErrorMessage {
+		internal static string ValueTypeErrMsg(Type value) => $"\"value\" type is invalid cast: {value}";
+		internal static string LeftTypeErrMsg(Type value) => $"\"left\" type is invalid cast: {value}";
+		internal static string RightTypeErrMsg(Type value) => $"\"right\" type is invalid cast: {value}";
+	}
+
 	public class BaseValueType {
 		protected object _value;
 		internal BaseValueType() => this._value = null;
@@ -10,65 +16,43 @@ namespace Janyee.Utilty {
 				this._value = value;
 			}
 			else {
-				throw new InvalidCastException($"\"value\" type is invalid cast: {value.GetType()}");
+				throw new InvalidCastException(ErrorMessage.ValueTypeErrMsg(value.GetType()));
 			}
 		}
 
-		//public static ValueType Add(BaseValueType left,BaseValueType right) {
-		//	Func<BaseValueType, BaseValueType, ValueType> calcRight = (a, b) => {
-		//		switch (b) {
-		//			case Integer ri:
-		//				return a + ri;
-		//			case Double rd:
-		//				return a + rd;
-		//			default:
-		//				throw new InvalidCastException();
-		//		}
-		//	};
-		//	if (left is Integer li) {
-		//		return calcRight(li, right);
-		//	}
-		//	else if (left is Double ld) {
-		//		return calcRight(ld, right);
-		//	}
-		//	else {
-		//		throw new InvalidCastException();
-		//	}
-		//}
-
 		public static ValueType operator +(BaseValueType left, BaseValueType right) {
-			Func<BaseValueType, BaseValueType, ValueType> calcRight = (a, b) => {
-				switch (b) {
-					case Integer ri:
-						return ((int)a._value) + ((int)ri._value);
-					case Double rd:
-						return ((int)a._value) + ((double)rd._value);
-					default:
-						throw new InvalidCastException();
-				}
-			};
-			if (left is Integer li) {
+			if (left is Integer linteger) {
 				switch (right) {
-					case Integer ri:
-						return ((int)li._value) + ((int)ri._value);
-					case Double rd:
-						return ((int)li._value) + ((double)rd._value);
+					case Integer rinteger:
+						return ((int)linteger._value) + ((int)rinteger._value);
+					case Double rdouble:
+						return ((int)linteger._value) + ((double)rdouble._value);
 					default:
-						throw new InvalidCastException($"\"right\" type is invalid cast: {right.GetType()}");
+						throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
 				}
 			}
-			else if (left is Double ld) {
+			else if (left is Double ldouble) {
 				switch (right) {
-					case Integer ri:
-						return ((double)ld._value) + ((int)ri._value);
-					case Double rd:
-						return ((double)ld._value) + ((double)rd._value);
+					case Integer rinteger:
+						return ((double)ldouble._value) + ((int)rinteger._value);
+					case Double rdouble:
+						return ((double)ldouble._value) + ((double)rdouble._value);
 					default:
-						throw new InvalidCastException($"\"right\" type is invalid cast: {right.GetType()}");
+						throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else if (left is Decimal ldecimal) {
+				switch (right) {
+					case Integer rinteger:
+						return ((double)ldecimal._value) + ((int)rinteger._value);
+					case Double rdouble:
+						return ((double)ldecimal._value) + ((double)rdouble._value);
+					default:
+						throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
 				}
 			}
 			else {
-				throw new InvalidCastException($"\"left\" type is invalid cast: {left.GetType()}");
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
 			}
 		}
 
@@ -135,11 +119,11 @@ namespace Janyee.Utilty {
 					return l + r;
 				}
 				else {
-					throw new InvalidCastException($"\"right\" type is invalid cast: {right.GetType()}");
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
 				}
 			}
 			else {
-				throw new InvalidCastException($"\"left\" type is invalid cast: {left.GetType()}");
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
 			}
 		}
 	}
@@ -153,11 +137,11 @@ namespace Janyee.Utilty {
 					return l + r;
 				}
 				else {
-					throw new InvalidCastException($"\"right\" type is invalid cast: {right.GetType()}");
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
 				}
 			}
 			else {
-				throw new InvalidCastException($"\"left\" type is invalid cast: {left.GetType()}");
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
 			}
 		}
 	}
@@ -171,11 +155,11 @@ namespace Janyee.Utilty {
 					return l + r;
 				}
 				else {
-					throw new InvalidCastException($"\"right\" type is invalid cast: {right.GetType()}");
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
 				}
 			}
 			else {
-				throw new InvalidCastException($"\"left\" type is invalid cast: {left.GetType()}");
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
 			}
 		}
 	}
