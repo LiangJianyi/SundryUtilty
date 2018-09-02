@@ -116,7 +116,7 @@ namespace Janyee.Utilty {
 		/******************************** unary operators overloaded ********************************/
 
 
-		#region unary operators overloaded
+		#region binary operators overloaded
 
 		public static int operator +(Integer left, Integer right) {
 			if (left._value is int l) {
@@ -177,6 +177,84 @@ namespace Janyee.Utilty {
 		public static int operator %(Integer left, Integer right) {
 			if (left._value is int l) {
 				if (right._value is int r) {
+					return l % r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
+	}
+
+	public class BigInteger : BaseValueType {
+		public BigInteger(object value = null) : base(value) { }
+
+		#region binary operators overloaded
+
+		public static System.Numerics.BigInteger operator +(BigInteger left, BigInteger right) {
+			if (left._value is System.Numerics.BigInteger l) {
+				if (right._value is System.Numerics.BigInteger r) {
+					return l + r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static System.Numerics.BigInteger operator -(BigInteger left, BigInteger right) {
+			if (left._value is System.Numerics.BigInteger l) {
+				if (right._value is System.Numerics.BigInteger r) {
+					return l - r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static System.Numerics.BigInteger operator *(BigInteger left, BigInteger right) {
+			if (left._value is System.Numerics.BigInteger l) {
+				if (right._value is System.Numerics.BigInteger r) {
+					return l * r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static System.Numerics.BigInteger operator /(BigInteger left, BigInteger right) {
+			if (left._value is System.Numerics.BigInteger l) {
+				if (right._value is System.Numerics.BigInteger r) {
+					return l / r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static System.Numerics.BigInteger operator %(BigInteger left, BigInteger right) {
+			if (left._value is System.Numerics.BigInteger l) {
+				if (right._value is System.Numerics.BigInteger r) {
 					return l % r;
 				}
 				else {
@@ -272,7 +350,7 @@ namespace Janyee.Utilty {
 	public class Double : BaseValueType {
 		public Double(object value = null) : base(value) { }
 
-		#region unary operators overloaded
+		#region binary operators overloaded
 
 		public static double operator +(Double left, Double right) {
 			if (left._value is double l) {
@@ -350,7 +428,7 @@ namespace Janyee.Utilty {
 	public class Decimal : BaseValueType {
 		public Decimal(object value = null) : base(value) { }
 
-		#region unary operators overloaded
+		#region binary operators overloaded
 
 		public static decimal operator +(Decimal left, Decimal right) {
 			if (left._value is decimal l) {
