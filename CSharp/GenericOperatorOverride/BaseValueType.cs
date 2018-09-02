@@ -110,6 +110,162 @@ namespace Janyee.Utilty {
 
 	}
 
+	public class Short : BaseValueType {
+		public Short(object value = null) : base(value) { }
+
+		#region binary operators overloaded
+
+		public static short operator +(Short left, Short right) {
+			if (left._value is short l) {
+				if (right._value is short r) {
+					return (short)(l + r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static short operator -(Short left, Short right) {
+			if (left._value is short l) {
+				if (right._value is short r) {
+					return (short)(l - r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static short operator *(Short left, Short right) {
+			if (left._value is short l) {
+				if (right._value is short r) {
+					return (short)(l * r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static short operator /(Short left, Short right) {
+			if (left._value is short l) {
+				if (right._value is short r) {
+					return (short)(l / r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static short operator %(Short left, Short right) {
+			if (left._value is short l) {
+				if (right._value is short r) {
+					return (short)(l % r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
+	}
+
+	public class Byte : BaseValueType {
+		public Byte(object value = null) : base(value) { }
+
+		#region binary operators overloaded
+
+		public static byte operator +(Byte left, Byte right) {
+			if (left._value is byte l) {
+				if (right._value is byte r) {
+					return (byte)(l + r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static byte operator -(Byte left, Byte right) {
+			if (left._value is byte l) {
+				if (right._value is byte r) {
+					return (byte)(l - r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static byte operator *(Byte left, Byte right) {
+			if (left._value is byte l) {
+				if (right._value is byte r) {
+					return (byte)(l * r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static byte operator /(Byte left, Byte right) {
+			if (left._value is byte l) {
+				if (right._value is byte r) {
+					return (byte)(l / r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static byte operator %(Byte left, Byte right) {
+			if (left._value is byte l) {
+				if (right._value is byte r) {
+					return (byte)(l % r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
+	}
+
 	public class Integer : BaseValueType {
 		public Integer(object value = null) : base(value) { }
 
@@ -177,6 +333,84 @@ namespace Janyee.Utilty {
 		public static int operator %(Integer left, Integer right) {
 			if (left._value is int l) {
 				if (right._value is int r) {
+					return l % r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
+	}
+
+	public class Long : BaseValueType {
+		public Long(object value = null) : base(value) { }
+
+		#region binary operators overloaded
+
+		public static long operator +(Long left, Long right) {
+			if (left._value is long l) {
+				if (right._value is long r) {
+					return l + r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static long operator -(Long left, Long right) {
+			if (left._value is long l) {
+				if (right._value is long r) {
+					return l - r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static long operator *(Long left, Long right) {
+			if (left._value is long l) {
+				if (right._value is long r) {
+					return l * r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static long operator /(Long left, Long right) {
+			if (left._value is long l) {
+				if (right._value is long r) {
+					return l / r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static long operator %(Long left, Long right) {
+			if (left._value is long l) {
+				if (right._value is long r) {
 					return l % r;
 				}
 				else {
@@ -269,12 +503,324 @@ namespace Janyee.Utilty {
 		#endregion
 	}
 
+	public class SByte : BaseValueType {
+		public SByte(object value = null) : base(value) { }
+
+		#region binary operators overloaded
+
+		public static sbyte operator +(SByte left, SByte right) {
+			if (left._value is sbyte l) {
+				if (right._value is sbyte r) {
+					return (sbyte)(l + r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static sbyte operator -(SByte left, SByte right) {
+			if (left._value is sbyte l) {
+				if (right._value is sbyte r) {
+					return (sbyte)(l - r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static sbyte operator *(SByte left, SByte right) {
+			if (left._value is sbyte l) {
+				if (right._value is sbyte r) {
+					return (sbyte)(l * r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static sbyte operator /(SByte left, SByte right) {
+			if (left._value is sbyte l) {
+				if (right._value is sbyte r) {
+					return (sbyte)(l / r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static sbyte operator %(SByte left, SByte right) {
+			if (left._value is sbyte l) {
+				if (right._value is sbyte r) {
+					return (sbyte)(l % r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
+	}
+
+	public class UShort : BaseValueType {
+		public UShort(object value = null) : base(value) { }
+
+		#region binary operators overloaded
+
+		public static ushort operator +(UShort left, UShort right) {
+			if (left._value is ushort l) {
+				if (right._value is ushort r) {
+					return (ushort)(l + r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static ushort operator -(UShort left, UShort right) {
+			if (left._value is ushort l) {
+				if (right._value is ushort r) {
+					return (ushort)(l - r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static ushort operator *(UShort left, UShort right) {
+			if (left._value is ushort l) {
+				if (right._value is ushort r) {
+					return (ushort)(l * r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static ushort operator /(UShort left, UShort right) {
+			if (left._value is ushort l) {
+				if (right._value is ushort r) {
+					return (ushort)(l / r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static ushort operator %(UShort left, UShort right) {
+			if (left._value is ushort l) {
+				if (right._value is ushort r) {
+					return (ushort)(l % r);
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
+	}
+
+	public class UInteger : BaseValueType {
+		public UInteger(object value = null) : base(value) { }
+
+		#region binary operators overloaded
+
+		public static uint operator +(UInteger left, UInteger right) {
+			if (left._value is uint l) {
+				if (right._value is uint r) {
+					return l + r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static uint operator -(UInteger left, UInteger right) {
+			if (left._value is uint l) {
+				if (right._value is uint r) {
+					return l - r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static uint operator *(UInteger left, UInteger right) {
+			if (left._value is uint l) {
+				if (right._value is uint r) {
+					return l * r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static uint operator /(UInteger left, UInteger right) {
+			if (left._value is uint l) {
+				if (right._value is uint r) {
+					return l / r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static uint operator %(UInteger left, UInteger right) {
+			if (left._value is uint l) {
+				if (right._value is uint r) {
+					return l % r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
+	}
+
+	public class ULong : BaseValueType {
+		public ULong(object value = null) : base(value) { }
+
+		#region binary operators overloaded
+
+		public static ulong operator +(ULong left, ULong right) {
+			if (left._value is ulong l) {
+				if (right._value is ulong r) {
+					return l + r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static ulong operator -(ULong left, ULong right) {
+			if (left._value is ulong l) {
+				if (right._value is ulong r) {
+					return l - r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static ulong operator *(ULong left, ULong right) {
+			if (left._value is ulong l) {
+				if (right._value is ulong r) {
+					return l * r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static ulong operator /(ULong left, ULong right) {
+			if (left._value is ulong l) {
+				if (right._value is ulong r) {
+					return l / r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		public static ulong operator %(ULong left, ULong right) {
+			if (left._value is ulong l) {
+				if (right._value is ulong r) {
+					return l % r;
+				}
+				else {
+					throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
+				}
+			}
+			else {
+				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
+			}
+		}
+
+		#endregion
+	}
+
 	public class Float : BaseValueType {
 		public Float(object value = null) : base(value) { }
 
-		#region unary operators overloaded
+		#region binary operators overloaded
 
-		public static float operator +(Float left,Float right) {
+		public static float operator +(Float left, Float right) {
 			if (left._value is float l) {
 				if (right._value is float r) {
 					return l + r;
