@@ -23,10 +23,30 @@ namespace Janyee.Utilty {
 		public static ValueType operator +(BaseValueType left, BaseValueType right) {
 			if (left is Integer linteger) {
 				switch (right) {
+					case Byte rbyte:
+						return ((int)linteger._value) + ((byte)rbyte._value);
+					case Short rshort:
+						return ((int)linteger._value) + ((short)rshort._value);
 					case Integer rinteger:
 						return ((int)linteger._value) + ((int)rinteger._value);
+					case Long rlong:
+						return ((int)linteger._value) + ((long)rlong._value);
+					case SByte rsbyte:
+						return ((int)linteger._value) + ((sbyte)rsbyte._value);
+					case UShort rushort:
+						return ((int)linteger._value) + ((ushort)rushort._value);
+					case UInteger ruinteger:
+						return ((int)linteger._value) + ((uint)ruinteger._value);
+					case ULong rulong:
+						throw new InvalidOperationException("Operator '+' cannot be applied to operands of type 'int' and 'ulong'");
+					case BigInteger rbiginteger:
+						return ((int)linteger._value) + ((System.Numerics.BigInteger)rbiginteger._value);
+					case Float rfloat:
+						return ((int)linteger._value) + ((float)rfloat._value);
 					case Double rdouble:
 						return ((int)linteger._value) + ((double)rdouble._value);
+					case Decimal rdecimal:
+						return ((int)linteger._value) + ((decimal)rdecimal._value);
 					default:
 						throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
 				}
@@ -44,9 +64,9 @@ namespace Janyee.Utilty {
 			else if (left is Decimal ldecimal) {
 				switch (right) {
 					case Integer rinteger:
-						return ((double)ldecimal._value) + ((int)rinteger._value);
+						return ((decimal)ldecimal._value) + ((int)rinteger._value);
 					case Double rdouble:
-						return ((double)ldecimal._value) + ((double)rdouble._value);
+						throw new InvalidOperationException("Operator '+' cannot be applied to operands of type 'decimal' and 'double'");
 					default:
 						throw new InvalidCastException(ErrorMessage.RightTypeErrMsg(right.GetType()));
 				}
