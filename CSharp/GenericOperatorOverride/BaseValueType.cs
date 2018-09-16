@@ -1980,6 +1980,14 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator Short(short v) {
+			return new Short(v);
+		}
+
+		public static explicit operator short(Short v) {
+			return (short)v._value;
+		}
 	}
 
 	public class Byte : BaseValueType {
@@ -2058,6 +2066,14 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator Byte(byte v) {
+			return new Byte(v);
+		}
+
+		public static explicit operator byte(Byte v) {
+			return (byte)v._value;
+		}
 	}
 
 	public class Integer : BaseValueType {
@@ -2137,8 +2153,15 @@ namespace Janyee.Utilty {
 				throw new InvalidCastException(ErrorMessage.LeftTypeErrMsg(left.GetType()));
 			}
 		}
-
 		#endregion
+
+		public static implicit operator Integer(int v) {
+			return new Integer(v);
+		}
+
+		public static explicit operator int(Integer v) {
+			return (int)v._value;
+		}
 	}
 
 	public class Long : BaseValueType {
@@ -2217,6 +2240,14 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator Long(int v) {
+			return new Long(v);
+		}
+
+		public static explicit operator long(Long v) {
+			return (long)v._value;
+		}
 	}
 
 	public class BigInteger : BaseValueType {
@@ -2295,6 +2326,14 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator BigInteger(System.Numerics.BigInteger v) {
+			return new BigInteger(v);
+		}
+
+		public static explicit operator System.Numerics.BigInteger(BigInteger v) {
+			return (System.Numerics.BigInteger)v._value;
+		}
 	}
 
 	public class SByte : BaseValueType {
@@ -2373,6 +2412,14 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator SByte(sbyte v) {
+			return new SByte(v);
+		}
+
+		public static explicit operator sbyte(SByte v) {
+			return (sbyte)v._value;
+		}
 	}
 
 	public class UShort : BaseValueType {
@@ -2451,6 +2498,14 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator UShort(ushort v) {
+			return new UShort(v);
+		}
+
+		public static explicit operator ushort(UShort v) {
+			return (ushort)v._value;
+		}
 	}
 
 	public class UInteger : BaseValueType {
@@ -2529,6 +2584,14 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator UInteger(uint v) {
+			return new UInteger(v);
+		}
+
+		public static explicit operator uint(UInteger v) {
+			return (uint)v._value;
+		}
 	}
 
 	public class ULong : BaseValueType {
@@ -2607,6 +2670,14 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator ULong(ulong v) {
+			return new ULong(v);
+		}
+
+		public static explicit operator ulong(ULong v) {
+			return (ulong)v._value;
+		}
 	}
 
 	public class Float : BaseValueType {
@@ -2685,6 +2756,14 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator Float(float v) {
+			return new Float(v);
+		}
+
+		public static explicit operator float(Float v) {
+			return (float)v._value;
+		}
 	}
 
 	public class Double : BaseValueType {
@@ -2763,6 +2842,14 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator Double(double v) {
+			return new Double(v);
+		}
+
+		public static explicit operator double(Double v) {
+			return (double)v._value;
+		}
 	}
 
 	public class Decimal : BaseValueType {
@@ -2841,5 +2928,13 @@ namespace Janyee.Utilty {
 		}
 
 		#endregion
+
+		public static implicit operator Decimal(decimal v) {
+			return new Decimal(v);
+		}
+
+		public static explicit operator decimal(Decimal v) {
+			return (decimal)v._value;
+		}
 	}
 }
