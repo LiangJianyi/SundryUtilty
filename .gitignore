@@ -261,4 +261,5 @@ __pycache__/
 *.pyc
 *.dll
 *.pdb
-CSharp/GenericOperatorOverride/obj/Debug/GenericOperatorOverride.csprojAssemblyReference.cache
+CSharp/GenericOperatorOverride/obj/*
+CSharp/GenericOperatorOverride/bin/*
