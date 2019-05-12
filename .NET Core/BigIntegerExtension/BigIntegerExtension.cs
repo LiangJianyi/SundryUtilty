@@ -10,7 +10,14 @@ using System.Numerics;
  * 注意：正数和负数有不同的处理方式（尤其是用来转换有符号整数的方法中）。
  * 正数需要在 res 比 bytes 多出的部分补零（其实什么都不用干，保留元素的默认值），
  * 负数需要在 res 比 bytes 多出的部分补FF（将元素的值改为 255，因为这是负数的补码形式），
- * 具体的实现细节在 if (bi.Sign == -1) 内部的循环中
+ * 具体的实现细节在 if (bi.Sign == -1) 内部的循环中。
+ * 比如有个值为 -9223372036854775 的 BigInteger 对象，
+ * 它的字节码为 09 AC 1C 5A 64 3B DF ，要想把它转为 Int64，就要在后面追加 FF
+ * 扩充为 64 位长度的字节码，否则 BitConverter 会把它转换为一个正整数。
+ * 
+ * 根据文档 https://docs.microsoft.com/en-us/dotnet/api/system.numerics.biginteger?view=netframework-4.8
+ * BigInteger 通常会为正数追加一个值为0的附加字节。
+ * 情况 else if (bytes.Length == sizeof(T) + 1) 专门负责这一点。
  */
 
 namespace Janyee.Utilty {
