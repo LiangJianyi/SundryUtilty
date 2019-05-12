@@ -1,6 +1,18 @@
 ﻿using System;
 using System.Numerics;
 
+/*
+ * 每个方法都有一个 else if (bytes.Length < sizeof(T)) 分支，
+ * 该分支专门处理 BigInteger 实参的长度小于 sizeof(T) 的情况，
+ * 先创建一个与 T 长度等价的 res 字节数组，然后将 BigInteger 
+ * 对应的字节数组填充到 res 数组，最后通过 BitConverter 产生
+ * 最终的结果。
+ * 注意：正数和负数有不同的处理方式（尤其是用来转换有符号整数的方法中）。
+ * 正数需要在 res 比 bytes 多出的部分补零（其实什么都不用干，保留元素的默认值），
+ * 负数需要在 res 比 bytes 多出的部分补FF（将元素的值改为 255，因为这是负数的补码形式），
+ * 具体的实现细节在 if (bi.Sign == -1) 内部的循环中
+ */
+
 namespace Janyee.Utilty {
     public static class BigIntegerExtension {
         public static int BigIntegerToInt32(this BigInteger bi) {
@@ -16,6 +28,13 @@ namespace Janyee.Utilty {
             else if (bytes.Length < sizeof(int)) {
                 byte[] res = new byte[sizeof(int)];
                 Array.Copy(bytes, res, bytes.Length);
+                if (bi.Sign == -1) {
+                    for (int i = 0; i < res.Length; i++) {
+                        if (res[i] == 0 && i >= bytes.Length) {
+                            res[i] = 255;
+                        }
+                    }
+                }
                 return BitConverter.ToInt32(res);
             }
             else {
@@ -56,6 +75,13 @@ namespace Janyee.Utilty {
             else if (bytes.Length < sizeof(long)) {
                 byte[] res = new byte[sizeof(long)];
                 Array.Copy(bytes, res, bytes.Length);
+                if (bi.Sign == -1) {
+                    for (int i = 0; i < res.Length; i++) {
+                        if (res[i] == 0 && i >= bytes.Length) {
+                            res[i] = 255;
+                        }
+                    }
+                }
                 return BitConverter.ToInt64(res);
             }
             else {

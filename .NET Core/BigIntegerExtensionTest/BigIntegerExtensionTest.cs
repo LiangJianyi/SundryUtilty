@@ -7,6 +7,32 @@ namespace BigIntegerExtensionTest {
     public class BigIntegerExtensionTest {
         [TestMethod]
         public void BigIntegerToInt32Test() {
+            int i = int.MaxValue;
+            while (true) {
+                if (i == 0) {
+                    int b = new BigInteger(i).BigIntegerToInt32(); ;
+                    Assert.AreEqual<int>(i, b);
+                    break;
+                }
+                else {
+                    int b = new BigInteger(i).BigIntegerToInt32(); ;
+                    Assert.AreEqual<int>(i, b);
+                    i /= 10;
+                }
+            }
+            i = int.MinValue;
+            while (true) {
+                if (i < 0) {
+                    int b = new BigInteger(i).BigIntegerToInt32(); ;
+                    Assert.AreEqual<int>(i, b);
+                    i /= 10;
+                }
+                else {
+                    int b = new BigInteger(i).BigIntegerToInt32(); ;
+                    Assert.AreEqual<int>(i, b);
+                    break;
+                }
+            }
         }
 
         [TestMethod]
