@@ -15,6 +15,60 @@ using System.Numerics;
 
 namespace Janyee.Utilty {
     public static class BigIntegerExtension {
+        public static short BigIntegerToInt16(this BigInteger bi) {
+            byte[] bytes = bi.ToByteArray();
+            if (bytes.Length == sizeof(short)) {
+                return BitConverter.ToInt16(bytes);
+            }
+            else if (bytes.Length == sizeof(short) + 1) {
+                byte[] res = new byte[sizeof(short)];
+                Array.Copy(bytes, res, bytes.Length - 1);
+                return BitConverter.ToInt16(res);
+            }
+            else if (bytes.Length < sizeof(short)) {
+                byte[] res = new byte[sizeof(short)];
+                Array.Copy(bytes, res, bytes.Length);
+                if (bi.Sign == -1) {
+                    for (int i = 0; i < res.Length; i++) {
+                        if (res[i] == 0 && i >= bytes.Length) {
+                            res[i] = 255;
+                        }
+                    }
+                }
+                return BitConverter.ToInt16(res);
+            }
+            else {
+                throw new ArgumentOutOfRangeException($"bi={bi}", "The bytes length of BigInteger larger than Int32.");
+            }
+        }
+
+        public static ushort BigIntegerToUInt16(this BigInteger bi) {
+            byte[] bytes = bi.ToByteArray();
+            if (bytes.Length == sizeof(ushort)) {
+                return BitConverter.ToUInt16(bytes);
+            }
+            else if (bytes.Length == sizeof(ushort) + 1) {
+                byte[] res = new byte[sizeof(ushort)];
+                Array.Copy(bytes, res, bytes.Length - 1);
+                return BitConverter.ToUInt16(res);
+            }
+            else if (bytes.Length < sizeof(ushort)) {
+                byte[] res = new byte[sizeof(ushort)];
+                Array.Copy(bytes, res, bytes.Length);
+                if (bi.Sign == -1) {
+                    for (int i = 0; i < res.Length; i++) {
+                        if (res[i] == 0 && i >= bytes.Length) {
+                            res[i] = 255;
+                        }
+                    }
+                }
+                return BitConverter.ToUInt16(res);
+            }
+            else {
+                throw new ArgumentOutOfRangeException($"bi={bi}", "The bytes length of BigInteger larger than Int32.");
+            }
+        }
+
         public static int BigIntegerToInt32(this BigInteger bi) {
             byte[] bytes = bi.ToByteArray();
             if (bytes.Length == sizeof(int)) {

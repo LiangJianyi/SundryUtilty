@@ -6,6 +6,53 @@ namespace BigIntegerExtensionTest {
     [TestClass]
     public class BigIntegerExtensionTest {
         [TestMethod]
+        public void BigIntegerToInt16Test() {
+            short i = short.MaxValue;
+            while (true) {
+                if (i == 0) {
+                    short b = new BigInteger(i).BigIntegerToInt16(); ;
+                    Assert.AreEqual<short>(i, b);
+                    break;
+                }
+                else {
+                    short b = new BigInteger(i).BigIntegerToInt16(); ;
+                    Assert.AreEqual<short>(i, b);
+                    i /= 10;
+                }
+            }
+            i = short.MinValue;
+            while (true) {
+                if (i < 0) {
+                    short b = new BigInteger(i).BigIntegerToInt16(); ;
+                    Assert.AreEqual<short>(i, b);
+                    i /= 10;
+                }
+                else {
+                    short b = new BigInteger(i).BigIntegerToInt16(); ;
+                    Assert.AreEqual<short>(i, b);
+                    break;
+                }
+            }
+        }
+
+        [TestMethod]
+        public void BigIntegerToUInt16Test() {
+            ushort i = ushort.MaxValue;
+            while (true) {
+                if (i == 0) {
+                    ushort b = new BigInteger(i).BigIntegerToUInt16(); ;
+                    Assert.AreEqual<ushort>(i, b);
+                    break;
+                }
+                else {
+                    ushort b = new BigInteger(i).BigIntegerToUInt16(); ;
+                    Assert.AreEqual<ushort>(i, b);
+                    i /= 10;
+                }
+            }
+        }
+
+        [TestMethod]
         public void BigIntegerToInt32Test() {
             int i = int.MaxValue;
             while (true) {
