@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Numerics;
 
 namespace Janyee.Utilty {
-	internal static class ErrorMessage {
+    internal static class ErrorMessage {
 		internal static string ValueTypeErrMsg(Type value) => $"\"value\" type is invalid cast: {value}";
 		internal static string LeftTypeErrMsg(Type value) => $"\"left\" type is invalid cast: {value}";
 		internal static string RightTypeErrMsg(Type value) => $"\"right\" type is invalid cast: {value}";
