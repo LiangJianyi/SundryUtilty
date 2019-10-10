@@ -4,9 +4,4 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Cons\Cons.csproj" />
-    <ProjectReference Include="..\SuckerTypeSystem\SuckerTypeSystem.csproj" />
-  </ItemGroup>
-
 </Project>
