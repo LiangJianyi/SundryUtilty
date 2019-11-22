@@ -9,7 +9,9 @@
 
 // add headers that you want to pre-compile here
 #include "framework.h"
+#include <iostream>
 #include <string>
 #include <random>
+#include <codecvt>
 
 #endif //PCH_H

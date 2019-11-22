@@ -18,3 +18,21 @@ __declspec(dllexport) std::string random_string(std::string::size_type length) {
 
 	return s;
 }
+
+__declspec(dllexport) int getSizeOfStringStream(std::stringstream& oss) {
+	oss.seekg(0, std::ios::end);
+	int size = oss.tellg();
+	return size;
+}
+
+
+// reference: https://codereview.stackexchange.com/questions/419/converting-between-stdwstring-and-stdstring
+__declspec(dllexport) std::wstring utf8ToUtf16(const std::string& utf8Str) {
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
+	return conv.from_bytes(utf8Str);
+}
+
+__declspec(dllexport) std::string utf16ToUtf8(const std::wstring& utf16Str) {
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
+	return conv.to_bytes(utf16Str);
+}
