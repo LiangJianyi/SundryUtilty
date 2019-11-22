@@ -17,6 +17,7 @@ __declspec(dllexport) std::string random_string(std::string::size_type length) {
 	return s;
 }
 
+// reference: https://stackoverflow.com/questions/4432793/size-of-stringstream
 __declspec(dllexport) int getSizeOfStringStream(std::stringstream& oss) {
 	oss.seekg(0, std::ios::end);
 	int size = oss.tellg();
