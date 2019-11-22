@@ -13,5 +13,6 @@
 #include <string>
 #include <random>
 #include <codecvt>
+#include <sstream>
 
 #endif //PCH_H
