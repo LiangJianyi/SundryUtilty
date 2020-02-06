@@ -98,8 +98,20 @@ void Janyee::DateTime::SetYear(decltype(_year) year) {
 
 void Janyee::DateTime::SetMonth(decltype(_month) month) {
 	auto checkMonth = [&]()->bool {
-		std::shared_ptr<std::vector<std::pair<int, int>>> monthPair;
-		return false;
+		std::map<int, int> monthPair;
+		monthPair[1] = 31;
+		monthPair[2] = IsLeapYear() ? 29 : 28;
+		monthPair[3] = 31;
+		monthPair[4] = 30;
+		monthPair[5] = 31;
+		monthPair[6] = 30;
+		monthPair[7] = 31;
+		monthPair[8] = 31;
+		monthPair[9] = 30;
+		monthPair[10] = 31;
+		monthPair[11] = 30;
+		monthPair[12] = 31;
+		return monthPair.find(*month) != monthPair.end();
 	};
 
 	if (*month < 0 || checkMonth()) {
@@ -145,13 +157,43 @@ std::shared_ptr<int> Janyee::DateTime::SetDayOfYear(std::shared_ptr<int> yearPtr
 	int mm = *monthPtr / 10;
 	int day = *dayPtr / 10;
 	int month[] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };    // 每个月的天数，从0开始        
-	if (IsLeapYear(year))         
+	if (IsLeapYear(year))
 		month[2] += 1;
 	int days = 0;
 	for (int i = 0; i < mm; ++i) {
 		days += month[i];
 	}
 	return std::make_shared<int>(days + day);
+}
+
+void Janyee::DateTime::SetHour(decltype(_hour) hour) {
+	if (*hour < 0 || *hour>23) {
+		std::string s { std::string("Value of hour is illegality: ") + std::to_string(*hour) };
+		throw std::out_of_range(s.c_str());
+	}
+	else {
+		_hour = hour;
+	}
+}
+
+void Janyee::DateTime::SetMinute(decltype(_minute) minute) {
+	if (*minute < 0 || *minute>59) {
+		std::string s { std::string("Value of minute is illegality: ") + std::to_string(*minute) };
+		throw std::out_of_range(s.c_str());
+	}
+	else {
+		_minute = minute;
+	}
+}
+
+void Janyee::DateTime::SetSecond(decltype(_second) second) {
+	if (*second < 0 || *second > 59) {
+		std::string s { std::string("Value of second is illegality: ") + std::to_string(*second) };
+		throw std::out_of_range(s.c_str());
+	}
+	else {
+		_second = second;
+	}
 }
 
 Janyee::DateTime Janyee::DateTime::Now() {

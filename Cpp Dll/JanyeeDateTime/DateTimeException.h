@@ -10,7 +10,7 @@ namespace Janyee
 	{
 		std::wstring message;
 	public:
-		DateTimeException() = default;
+		DateTimeException() :runtime_error("Unknown error.") {};
 		DateTimeException(std::wstring const& msg) :message(msg), runtime_error(Utilty::WstringToString(msg)) {}
 	};
 }

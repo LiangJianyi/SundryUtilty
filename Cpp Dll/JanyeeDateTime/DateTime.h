@@ -2,7 +2,7 @@
 #include <chrono>
 #include <memory>
 #include <typeinfo>
-#include <utility>
+#include <map>
 #include <vector>
 #include "DateTimeException.h"
 
@@ -68,8 +68,8 @@ namespace Janyee
 			_year(std::make_shared<int>(year)),
 			_month(std::make_shared<int>(month)),
 			_dayOfMonth(std::make_shared<int>(day)),
-			_dayOfWeek(std::make_shared<int>(SetDayOfWeek(_year, _month, _dayOfMonth))),
-			_dayOfYear(std::make_shared<int>(SetDayOfYear(_year, _month, _dayOfMonth))),
+			_dayOfWeek(SetDayOfWeek(_year, _month, _dayOfMonth)),
+			_dayOfYear(SetDayOfYear(_year, _month, _dayOfMonth)),
 			_isDaylightSavingTime(std::make_shared<bool>(dayLight)),
 			_hour(std::make_shared<int>(hour)),
 			_minute(std::make_shared<int>(minute)),
@@ -89,18 +89,18 @@ namespace Janyee
 		int Second() const;
 		bool IsLeapYear() const;
 		bool IsLeapYear(int year) const;
-		template<typename S> S ToString() const {
-			if (typeid(S) == typeid(std::string)) {
-
-			}
-			else if (typeid(S) == typeid(std::wstring)) {
-
-			}
-			else {
-				std::string s { std::string(typeid(S).name) + std::string("is not match type to in DateTime::ToString.") };
-				throw std::bad_typeid(s.c_str());
-			}
-		}
+		//template<typename S> S ToString() const {
+		//	if (typeid(S) == typeid(std::string)) {
+		//		return "";
+		//	}
+		//	else if (typeid(S) == typeid(std::wstring)) {
+		//		return L"";
+		//	}
+		//	else {
+		//		std::string s { std::string(typeid(S).name) + std::string(" is not match type in DateTime::ToString().") };
+		//		throw std::bad_typeid(s.c_str());
+		//	}
+		//}
 	};
 }
 
