@@ -2,6 +2,8 @@
 #include <chrono>
 #include <memory>
 #include <typeinfo>
+#include <utility>
+#include <vector>
 #include "DateTimeException.h"
 
 namespace Janyee
@@ -27,15 +29,21 @@ namespace Janyee
 		std::shared_ptr<int> _second;
 		std::shared_ptr<LocalTimeZone> _localTimeZone;
 		void CheckErrno(errno_t err);
-		int SetDayOfWeek(std::shared_ptr<int> year, std::shared_ptr<int> month, std::shared_ptr<int> day) const;
-		int SetDayOfYear(std::shared_ptr<int> yearPtr, std::shared_ptr<int> monthPtr, std::shared_ptr<int> dayPtr) const;
+		void SetYear(decltype(_year) year);
+		void SetMonth(decltype(_month) month);
+		void SetDayOfMonth(decltype(_dayOfMonth) dayOfMonth);
+		decltype(_dayOfWeek) SetDayOfWeek(std::shared_ptr<int> year, std::shared_ptr<int> month, std::shared_ptr<int> day) const;
+		decltype(_dayOfYear) SetDayOfYear(std::shared_ptr<int> yearPtr, std::shared_ptr<int> monthPtr, std::shared_ptr<int> dayPtr) const;
+		void SetHour(decltype(_hour) hour);
+		void SetMinute(decltype(_minute) minute);
+		void SetSecond(decltype(_second) second);
 	public:
 		DateTime() :_now(), _tm(),
 			_year(std::make_shared<int>(1)),
 			_month(std::make_shared<int>(1)),
 			_dayOfMonth(std::make_shared<int>(1)),
-			_dayOfWeek(std::make_shared<int>(SetDayOfWeek(_year, _month, _dayOfMonth))),
-			_dayOfYear(std::make_shared<int>(SetDayOfYear(_year, _month, _dayOfMonth))),
+			_dayOfWeek(SetDayOfWeek(_year, _month, _dayOfMonth)),
+			_dayOfYear(SetDayOfYear(_year, _month, _dayOfMonth)),
 			_isDaylightSavingTime(std::make_shared<bool>(false)),
 			_hour(std::make_shared<int>(0)),
 			_minute(std::make_shared<int>(0)),
@@ -56,17 +64,17 @@ namespace Janyee
 			_localTimeZone(std::make_shared<LocalTimeZone>(LocalTimeZone::ZH_CN)) {
 			CheckErrno(localtime_s(&_tm, &_now));
 		}
-		DateTime(int year, int month, int day) :_now(), _tm(),
+		DateTime(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, bool dayLight = false, LocalTimeZone localTimeZone = LocalTimeZone::ZH_CN) :_now(), _tm(),
 			_year(std::make_shared<int>(year)),
 			_month(std::make_shared<int>(month)),
 			_dayOfMonth(std::make_shared<int>(day)),
 			_dayOfWeek(std::make_shared<int>(SetDayOfWeek(_year, _month, _dayOfMonth))),
 			_dayOfYear(std::make_shared<int>(SetDayOfYear(_year, _month, _dayOfMonth))),
-			_isDaylightSavingTime(std::make_shared<bool>(false)),
-			_hour(std::make_shared<int>(0)),
-			_minute(std::make_shared<int>(0)),
-			_second(std::make_shared<int>(0)),
-			_localTimeZone(std::make_shared<LocalTimeZone>(LocalTimeZone::ZH_CN)) {
+			_isDaylightSavingTime(std::make_shared<bool>(dayLight)),
+			_hour(std::make_shared<int>(hour)),
+			_minute(std::make_shared<int>(minute)),
+			_second(std::make_shared<int>(second)),
+			_localTimeZone(std::make_shared<LocalTimeZone>(localTimeZone)) {
 			CheckErrno(localtime_s(&_tm, &_now));
 		}
 		static DateTime Now();
@@ -79,6 +87,8 @@ namespace Janyee
 		int Hour() const;
 		int Minute() const;
 		int Second() const;
+		bool IsLeapYear() const;
+		bool IsLeapYear(int year) const;
 		template<typename S> S ToString() const {
 			if (typeid(S) == typeid(std::string)) {
 

@@ -86,10 +86,45 @@ void Janyee::DateTime::CheckErrno(errno_t err) {
 	}
 }
 
+void Janyee::DateTime::SetYear(decltype(_year) year) {
+	if (*year < 0) {
+		std::string s { std::string("Value of year is illegality: ") + std::to_string(*year) };
+		throw std::out_of_range(s.c_str());
+	}
+	else {
+		_year = year;
+	}
+}
+
+void Janyee::DateTime::SetMonth(decltype(_month) month) {
+	auto checkMonth = [&]()->bool {
+		std::shared_ptr<std::vector<std::pair<int, int>>> monthPair;
+		return false;
+	};
+
+	if (*month < 0 || checkMonth()) {
+		std::string s { std::string("Value of month is illegality: ") + std::to_string(*month) };
+		throw std::out_of_range(s.c_str());
+	}
+	else {
+		_month = month;
+	}
+}
+
+void Janyee::DateTime::SetDayOfMonth(decltype(_dayOfMonth) dayOfMonth) {
+	if (*dayOfMonth < 0) {
+		std::string s { std::string("Value of month is illegality: ") + std::to_string(*dayOfMonth) };
+		throw std::out_of_range(s.c_str());
+	}
+	else {
+		_month = dayOfMonth;
+	}
+}
+
 /*
-	Algorithm reference: https://weibolu.online/2019/08/04/基础算法3%20——%20日期推测星期数/
+https://weibolu.online/2019/08/04/基础算法3%20——%20日期推测星期数/
 */
-int Janyee::DateTime::SetDayOfWeek(std::shared_ptr<int> year, std::shared_ptr<int> month, std::shared_ptr<int> day) const {
+std::shared_ptr<int> Janyee::DateTime::SetDayOfWeek(std::shared_ptr<int> year, std::shared_ptr<int> month, std::shared_ptr<int> day) const {
 	int c = *year / 100;
 	int d = *year % 100;
 	int week = (c / 4) - 2 * c + (d + d / 4) + (13 * (*month + 1) / 5) + *day - 1;
@@ -99,22 +134,24 @@ int Janyee::DateTime::SetDayOfWeek(std::shared_ptr<int> year, std::shared_ptr<in
 	else {
 		week %= 7;
 	}
-	return week;
+	return std::make_shared<int>(week);
 }
 
-int Janyee::DateTime::SetDayOfYear(std::shared_ptr<int> yearPtr, std::shared_ptr<int> monthPtr, std::shared_ptr<int> dayPtr) const {
+/*
+https://blog.csdn.net/qq_34732729/article/details/103185602
+*/
+std::shared_ptr<int> Janyee::DateTime::SetDayOfYear(std::shared_ptr<int> yearPtr, std::shared_ptr<int> monthPtr, std::shared_ptr<int> dayPtr) const {
 	int year = *yearPtr / 10;
 	int mm = *monthPtr / 10;
 	int day = *dayPtr / 10;
 	int month[] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };    // 每个月的天数，从0开始        
-	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)     // 闰年计算法            
+	if (IsLeapYear(year))         
 		month[2] += 1;
 	int days = 0;
 	for (int i = 0; i < mm; ++i) {
 		days += month[i];
 	}
-	return days + day;
-
+	return std::make_shared<int>(days + day);
 }
 
 Janyee::DateTime Janyee::DateTime::Now() {
@@ -155,4 +192,12 @@ int Janyee::DateTime::Minute() const {
 
 int Janyee::DateTime::Second() const {
 	return *_second;
+}
+
+bool Janyee::DateTime::IsLeapYear() const {
+	return (*_year % 4 == 0 && *_year % 100 != 0) || *_year % 400 == 0;
+}
+
+bool Janyee::DateTime::IsLeapYear(int year) const {
+	return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }
