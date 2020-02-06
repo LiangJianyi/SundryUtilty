@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "DateTime.h"
 
 void Janyee::DateTime::CheckErrno(errno_t err) {
@@ -86,38 +86,73 @@ void Janyee::DateTime::CheckErrno(errno_t err) {
 	}
 }
 
+/*
+	Algorithm reference: https://weibolu.online/2019/08/04/基础算法3%20——%20日期推测星期数/
+*/
+int Janyee::DateTime::SetDayOfWeek(std::shared_ptr<int> year, std::shared_ptr<int> month, std::shared_ptr<int> day) const {
+	int c = *year / 100;
+	int d = *year % 100;
+	int week = (c / 4) - 2 * c + (d + d / 4) + (13 * (*month + 1) / 5) + *day - 1;
+	if (week < 0) {
+		week = (week + (-week / 7 + 1) * 7) % 7;
+	}
+	else {
+		week %= 7;
+	}
+	return week;
+}
+
+int Janyee::DateTime::SetDayOfYear(std::shared_ptr<int> yearPtr, std::shared_ptr<int> monthPtr, std::shared_ptr<int> dayPtr) const {
+	int year = *yearPtr / 10;
+	int mm = *monthPtr / 10;
+	int day = *dayPtr / 10;
+	int month[] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };    // 每个月的天数，从0开始        
+	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)     // 闰年计算法            
+		month[2] += 1;
+	int days = 0;
+	for (int i = 0; i < mm; ++i) {
+		days += month[i];
+	}
+	return days + day;
+
+}
+
+Janyee::DateTime Janyee::DateTime::Now() {
+	return DateTime(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
+}
+
 int Janyee::DateTime::Year() const {
-	return _tm.tm_year + 1900;
+	return *_year;
 }
 
 int Janyee::DateTime::Month() const {
-	return _tm.tm_mon + 1;
+	return *_month;
 }
 
 int Janyee::DateTime::DayOfMonth() const {
-	return _tm.tm_mday;
+	return *_dayOfMonth;
 }
 
 int Janyee::DateTime::DayOfWeek() const {
-	return _tm.tm_wday + 1;
+	return *_dayOfWeek;
 }
 
 int Janyee::DateTime::DayOfYear() const {
-	return _tm.tm_yday + 1;
+	return *_dayOfYear;
 }
 
 bool Janyee::DateTime::IsDaylightSavingTime() const {
-	return _tm.tm_isdst;
+	return *_isDaylightSavingTime;
 }
 
 int Janyee::DateTime::Hour() const {
-	return _tm.tm_hour;
+	return *_hour;
 }
 
 int Janyee::DateTime::Minute() const {
-	return _tm.tm_min;
+	return *_minute;
 }
 
 int Janyee::DateTime::Second() const {
-	return _tm.tm_sec;
+	return *_second;
 }
