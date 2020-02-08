@@ -1,7 +1,6 @@
 #pragma once
 #include <chrono>
 #include <memory>
-#include <typeinfo>
 #include <map>
 #include <vector>
 #include "DateTimeException.h"
@@ -89,18 +88,46 @@ namespace Janyee
 		int Second() const;
 		bool IsLeapYear() const;
 		bool IsLeapYear(int year) const;
-		//template<typename S> S ToString() const {
-		//	if (typeid(S) == typeid(std::string)) {
-		//		return "";
-		//	}
-		//	else if (typeid(S) == typeid(std::wstring)) {
-		//		return L"";
-		//	}
-		//	else {
-		//		std::string s { std::string(typeid(S).name) + std::string(" is not match type in DateTime::ToString().") };
-		//		throw std::bad_typeid(s.c_str());
-		//	}
-		//}
+		void SetLocalTimeZone(LocalTimeZone const& local) {
+			_localTimeZone = std::make_shared<LocalTimeZone>(local);
+		}
+		std::string ToString() const {
+			const std::string yearString { std::to_string(Year()) };
+			const std::string monthString { std::to_string(Month()) };
+			const std::string dayOfMonthString { std::to_string(DayOfMonth()) };
+			const std::string yearOfWeekString { std::to_string(DayOfWeek()) };
+			const std::string hourString { std::to_string(Hour()) };
+			const std::string minuteString { std::to_string(Minute()) };
+			const std::string secondString { std::to_string(Second()) };
+			auto WeekToString { [](int const& week)->std::string {
+				switch (week) {
+					case 1:
+						return "Mon";
+					case 2:
+						return "Tue";
+					case 3:
+						return "Wed";
+					case 4:
+						return "Thu";
+					case 5:
+						return "Fri";
+					case 6:
+						return "Sat";
+					case 7:
+						return "Sun";
+					default:
+						throw std::exception();
+				}
+			} };
+			switch (*_localTimeZone) {
+				case LocalTimeZone::EN_US:
+					return monthString + "/" + dayOfMonthString + "/" + yearString + " " + hourString + ":" + minuteString + ":" + secondString + " " + WeekToString(DayOfWeek());
+				case LocalTimeZone::ZH_CN:
+					return yearString + "/" + monthString + "/" + dayOfMonthString + " " + hourString + ":" + minuteString + ":" + secondString + " " + WeekToString(DayOfWeek());
+				default:
+					throw std::exception();
+			}
+		}
 	};
 }
 
