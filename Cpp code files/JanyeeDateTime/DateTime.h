@@ -55,7 +55,7 @@ namespace Janyee
 			_year = _tm.tm_year + 1900;
 			_month = _tm.tm_mon + 1;
 			_dayOfMonth = _tm.tm_mday;
-			_dayOfWeek = _tm.tm_wday + 1;
+			_dayOfWeek = _tm.tm_wday;
 			_dayOfYear = _tm.tm_yday + 1;
 			_isDaylightSavingTime = false;
 			_hour = _tm.tm_isdst;
@@ -63,7 +63,7 @@ namespace Janyee
 			_second = _tm.tm_min;
 			_localTimeZone = LocalTimeZone::ZH_CN;
 		}
-		DateTime(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, bool dayLight = false, LocalTimeZone localTimeZone = LocalTimeZone::ZH_CN) :_now(), _tm(), _isDaylightSavingTime(std::make_shared<bool>(dayLight)) {
+		DateTime(int const& year, int const& month, int const& day, int const& hour = 0, int const& minute = 0, int const& second = 0, bool const& dayLight = false, LocalTimeZone const& localTimeZone = LocalTimeZone::ZH_CN) :_now(), _tm(), _isDaylightSavingTime(std::make_shared<bool>(dayLight)) {
 			CheckErrno(localtime_s(&_tm, &_now));
 			SetYear(year);
 			SetMonth(month);
@@ -88,57 +88,20 @@ namespace Janyee
 			SetLocalTimeZone(localTimeZone);
 		}
 		static DateTime Now();
-		int Year() const;
-		int Month() const;
-		int DayOfMonth() const;
-		int DayOfWeek() const;
-		int DayOfYear() const;
+		int GetYear() const;
+		int GetMonth() const;
+		int GetDayOfMonth() const;
+		int GetDayOfWeek() const;
+		int GetDayOfYear() const;
 		bool IsDaylightSavingTime() const;
-		int Hour() const;
-		int Minute() const;
-		int Second() const;
+		int GetHour() const;
+		int GetMinute() const;
+		int GetSecond() const;
 		bool IsLeapYear() const;
 		bool IsLeapYear(int year) const;
-		void SetLocalTimeZone(LocalTimeZone const& local) {
-			_localTimeZone = local;
-		}
-		std::string ToString() const {
-			const std::string yearString { std::to_string(Year()) };
-			const std::string monthString { std::to_string(Month()) };
-			const std::string dayOfMonthString { std::to_string(DayOfMonth()) };
-			const std::string yearOfWeekString { std::to_string(DayOfWeek()) };
-			const std::string hourString { std::to_string(Hour()) };
-			const std::string minuteString { std::to_string(Minute()) };
-			const std::string secondString { std::to_string(Second()) };
-			auto WeekToString { [](int const& week)->std::string {
-				switch (week) {
-					case 1:
-						return "Mon";
-					case 2:
-						return "Tue";
-					case 3:
-						return "Wed";
-					case 4:
-						return "Thu";
-					case 5:
-						return "Fri";
-					case 6:
-						return "Sat";
-					case 7:
-						return "Sun";
-					default:
-						throw DateTimeException();
-				}
-			} };
-			switch (_localTimeZone) {
-				case LocalTimeZone::EN_US:
-					return monthString + "/" + dayOfMonthString + "/" + yearString + " " + hourString + ":" + minuteString + ":" + secondString + " " + WeekToString(DayOfWeek());
-				case LocalTimeZone::ZH_CN:
-					return yearString + "/" + monthString + "/" + dayOfMonthString + " " + hourString + ":" + minuteString + ":" + secondString + " " + WeekToString(DayOfWeek());
-				default:
-					throw DateTimeException();
-			}
-		}
+		void SetLocalTimeZone(LocalTimeZone const& local);
+		LocalTimeZone GetLocalTimeZone() const;
+		std::string ToString() const;
 	};
 }
 

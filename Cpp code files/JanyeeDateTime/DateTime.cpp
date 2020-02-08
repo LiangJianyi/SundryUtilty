@@ -113,7 +113,7 @@ void Janyee::DateTime::SetMonth(decltype(_month) const& month) {
 		monthPair[10] = 31;
 		monthPair[11] = 30;
 		monthPair[12] = 31;
-		return monthPair.find(month) != monthPair.end();
+		return monthPair.find(month) == monthPair.end();
 	};
 
 	if (month < 0 || checkMonth()) {
@@ -202,23 +202,23 @@ Janyee::DateTime Janyee::DateTime::Now() {
 	return DateTime(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
 }
 
-int Janyee::DateTime::Year() const {
+int Janyee::DateTime::GetYear() const {
 	return _year;
 }
 
-int Janyee::DateTime::Month() const {
+int Janyee::DateTime::GetMonth() const {
 	return _month;
 }
 
-int Janyee::DateTime::DayOfMonth() const {
+int Janyee::DateTime::GetDayOfMonth() const {
 	return _dayOfMonth;
 }
 
-int Janyee::DateTime::DayOfWeek() const {
+int Janyee::DateTime::GetDayOfWeek() const {
 	return _dayOfWeek;
 }
 
-int Janyee::DateTime::DayOfYear() const {
+int Janyee::DateTime::GetDayOfYear() const {
 	return _dayOfYear;
 }
 
@@ -226,15 +226,15 @@ bool Janyee::DateTime::IsDaylightSavingTime() const {
 	return _isDaylightSavingTime;
 }
 
-int Janyee::DateTime::Hour() const {
+int Janyee::DateTime::GetHour() const {
 	return _hour;
 }
 
-int Janyee::DateTime::Minute() const {
+int Janyee::DateTime::GetMinute() const {
 	return _minute;
 }
 
-int Janyee::DateTime::Second() const {
+int Janyee::DateTime::GetSecond() const {
 	return _second;
 }
 
@@ -244,4 +244,50 @@ bool Janyee::DateTime::IsLeapYear() const {
 
 bool Janyee::DateTime::IsLeapYear(int year) const {
 	return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+}
+
+void Janyee::DateTime::SetLocalTimeZone(LocalTimeZone const& local) {
+	_localTimeZone = local;
+}
+
+Janyee::LocalTimeZone Janyee::DateTime::GetLocalTimeZone() const {
+	return _localTimeZone;
+}
+
+std::string Janyee::DateTime::ToString() const {
+	const std::string yearString { std::to_string(GetYear()) };
+	const std::string monthString { std::to_string(GetMonth()) };
+	const std::string dayOfMonthString { std::to_string(GetDayOfMonth()) };
+	const std::string yearOfWeekString { std::to_string(GetDayOfWeek()) };
+	const std::string hourString { std::to_string(GetHour()) };
+	const std::string minuteString { std::to_string(GetMinute()) };
+	const std::string secondString { std::to_string(GetSecond()) };
+	auto WeekToString { [](int const& week)->std::string {
+		switch (week) {
+			case 1:
+				return "Mon.";
+			case 2:
+				return "Tue.";
+			case 3:
+				return "Wed.";
+			case 4:
+				return "Thu.";
+			case 5:
+				return "Fri.";
+			case 6:
+				return "Sat.";
+			case 7:
+				return "Sun.";
+			default:
+				throw DateTimeException();
+		}
+	} };
+	switch (_localTimeZone) {
+		case LocalTimeZone::EN_US:
+			return monthString + "/" + dayOfMonthString + "/" + yearString + " " + hourString + ":" + minuteString + ":" + secondString + " " + WeekToString(GetDayOfWeek());
+		case LocalTimeZone::ZH_CN:
+			return yearString + "/" + monthString + "/" + dayOfMonthString + " " + hourString + ":" + minuteString + ":" + secondString + " " + WeekToString(GetDayOfWeek());
+		default:
+			throw DateTimeException();
+	}
 }
