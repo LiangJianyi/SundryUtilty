@@ -131,7 +131,7 @@ void Janyee::DateTime::SetDayOfMonth(decltype(_dayOfMonth) const& dayOfMonth) {
 		throw std::out_of_range(s.c_str());
 	}
 	else {
-		_month = dayOfMonth;
+		_dayOfMonth = dayOfMonth;
 	}
 }
 
@@ -165,7 +165,7 @@ void Janyee::DateTime::SetDayOfYear(int const& yy, int const& mm, int const& dd)
 	for (int i = 0; i < month; ++i) {
 		days += monthList[i];
 	}
-	_dayOfWeek = days + dd;
+	_dayOfYear = days + dd;
 }
 
 void Janyee::DateTime::SetHour(decltype(_hour) const& hour) {
@@ -255,15 +255,10 @@ Janyee::LocalTimeZone Janyee::DateTime::GetLocalTimeZone() const {
 }
 
 std::string Janyee::DateTime::ToString() const {
-	const std::string yearString { std::to_string(GetYear()) };
-	const std::string monthString { std::to_string(GetMonth()) };
-	const std::string dayOfMonthString { std::to_string(GetDayOfMonth()) };
-	const std::string yearOfWeekString { std::to_string(GetDayOfWeek()) };
-	const std::string hourString { std::to_string(GetHour()) };
-	const std::string minuteString { std::to_string(GetMinute()) };
-	const std::string secondString { std::to_string(GetSecond()) };
 	auto WeekToString { [](int const& week)->std::string {
 		switch (week) {
+			case 0:
+				return "Sun.";
 			case 1:
 				return "Mon.";
 			case 2:
@@ -276,17 +271,22 @@ std::string Janyee::DateTime::ToString() const {
 				return "Fri.";
 			case 6:
 				return "Sat.";
-			case 7:
-				return "Sun.";
 			default:
 				throw DateTimeException();
 		}
 	} };
+	const std::string yearString { std::to_string(GetYear()) };
+	const std::string monthString { std::to_string(GetMonth()) };
+	const std::string dayOfMonthString { std::to_string(GetDayOfMonth()) };
+	const std::string yearOfWeekString { WeekToString(GetDayOfWeek()) };
+	const std::string hourString { std::to_string(GetHour()) };
+	const std::string minuteString { std::to_string(GetMinute()) };
+	const std::string secondString { std::to_string(GetSecond()) };
 	switch (_localTimeZone) {
 		case LocalTimeZone::EN_US:
-			return monthString + "/" + dayOfMonthString + "/" + yearString + " " + hourString + ":" + minuteString + ":" + secondString + " " + WeekToString(GetDayOfWeek());
+			return monthString + "/" + dayOfMonthString + "/" + yearString + " " + hourString + ":" + minuteString + ":" + secondString + " " + yearOfWeekString;
 		case LocalTimeZone::ZH_CN:
-			return yearString + "/" + monthString + "/" + dayOfMonthString + " " + hourString + ":" + minuteString + ":" + secondString + " " + WeekToString(GetDayOfWeek());
+			return yearString + "/" + monthString + "/" + dayOfMonthString + " " + hourString + ":" + minuteString + ":" + secondString + " " + yearOfWeekString;
 		default:
 			throw DateTimeException();
 	}

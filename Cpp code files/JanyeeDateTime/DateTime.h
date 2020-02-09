@@ -57,10 +57,10 @@ namespace Janyee
 			_dayOfMonth = _tm.tm_mday;
 			_dayOfWeek = _tm.tm_wday;
 			_dayOfYear = _tm.tm_yday + 1;
-			_isDaylightSavingTime = false;
-			_hour = _tm.tm_isdst;
-			_minute = _tm.tm_hour;
-			_second = _tm.tm_min;
+			_isDaylightSavingTime = _tm.tm_isdst,
+			_hour = _tm.tm_hour;
+			_minute = _tm.tm_min;
+			_second = _tm.tm_sec;
 			_localTimeZone = LocalTimeZone::ZH_CN;
 		}
 		DateTime(int const& year, int const& month, int const& day, int const& hour = 0, int const& minute = 0, int const& second = 0, bool const& dayLight = false, LocalTimeZone const& localTimeZone = LocalTimeZone::ZH_CN) :_now(), _tm(), _isDaylightSavingTime(std::make_shared<bool>(dayLight)) {
