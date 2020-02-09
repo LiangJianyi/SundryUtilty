@@ -291,3 +291,24 @@ std::string Janyee::DateTime::ToString() const {
 			throw DateTimeException();
 	}
 }
+
+std::string Janyee::DateTime::ToShortDate() const {
+	const std::string yearString { std::to_string(GetYear()) };
+	const std::string monthString { std::to_string(GetMonth()) };
+	const std::string dayOfMonthString { std::to_string(GetDayOfMonth()) };
+	switch (_localTimeZone) {
+		case LocalTimeZone::EN_US:
+			return monthString + "/" + dayOfMonthString + "/" + yearString;
+		case LocalTimeZone::ZH_CN:
+			return yearString + "/" + monthString + "/" + dayOfMonthString;
+		default:
+			throw DateTimeException();
+	}
+}
+
+std::string Janyee::DateTime::ToShortTime() const {
+	const std::string hourString { std::to_string(GetHour()) };
+	const std::string minuteString { std::to_string(GetMinute()) };
+	const std::string secondString { std::to_string(GetSecond()) };
+	return hourString + ":" + minuteString + ":" + secondString;
+}

@@ -102,6 +102,8 @@ namespace Janyee
 		void SetLocalTimeZone(LocalTimeZone const& local);
 		LocalTimeZone GetLocalTimeZone() const;
 		std::string ToString() const;
+		std::string ToShortDate() const;
+		std::string ToShortTime() const;
 	};
 }
 
