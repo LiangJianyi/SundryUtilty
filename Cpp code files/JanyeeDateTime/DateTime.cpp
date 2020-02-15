@@ -90,8 +90,8 @@ void Janyee::DateTime::CheckErrno(errno_t err) {
 
 void Janyee::DateTime::SetYear(decltype(_year) const& year) {
 	if (year < 0) {
-		std::string s { std::string("Value of year is illegality: ") + std::to_string(year) };
-		throw std::out_of_range(s.c_str());
+		std::wstring s { std::wstring(L"Value of year is illegality: ") + std::to_wstring(year) };
+		throw DateTimeException(s);
 	}
 	else {
 		_year = year;
@@ -117,8 +117,8 @@ void Janyee::DateTime::SetMonth(decltype(_month) const& month) {
 	};
 
 	if (month < 0 || checkMonth()) {
-		std::string s { std::string("Value of month is illegality: ") + std::to_string(month) };
-		throw std::out_of_range(s.c_str());
+		std::wstring s { std::wstring(L"Value of month is illegality: ") + std::to_wstring(month) };
+		throw DateTimeException(s);
 	}
 	else {
 		_month = month;
@@ -127,8 +127,8 @@ void Janyee::DateTime::SetMonth(decltype(_month) const& month) {
 
 void Janyee::DateTime::SetDayOfMonth(decltype(_dayOfMonth) const& dayOfMonth) {
 	if (dayOfMonth < 0) {
-		std::string s { std::string("Value of month is illegality: ") + std::to_string(dayOfMonth) };
-		throw std::out_of_range(s.c_str());
+		std::wstring s { std::wstring(L"Value of month is illegality: ") + std::to_wstring(dayOfMonth) };
+		throw DateTimeException(s);
 	}
 	else {
 		_dayOfMonth = dayOfMonth;
@@ -170,8 +170,8 @@ void Janyee::DateTime::SetDayOfYear(int const& yy, int const& mm, int const& dd)
 
 void Janyee::DateTime::SetHour(decltype(_hour) const& hour) {
 	if (hour < 0 || hour>23) {
-		std::string s { std::string("Value of hour is illegality: ") + std::to_string(hour) };
-		throw std::out_of_range(s.c_str());
+		std::wstring s { std::wstring(L"Value of hour is illegality: ") + std::to_wstring(hour) };
+		throw DateTimeException(s);
 	}
 	else {
 		_hour = hour;
@@ -180,8 +180,8 @@ void Janyee::DateTime::SetHour(decltype(_hour) const& hour) {
 
 void Janyee::DateTime::SetMinute(decltype(_minute) const& minute) {
 	if (minute < 0 || minute>59) {
-		std::string s { std::string("Value of minute is illegality: ") + std::to_string(minute) };
-		throw std::out_of_range(s.c_str());
+		std::wstring s { std::wstring(L"Value of minute is illegality: ") + std::to_wstring(minute) };
+		throw DateTimeException(s);
 	}
 	else {
 		_minute = minute;
@@ -190,8 +190,8 @@ void Janyee::DateTime::SetMinute(decltype(_minute) const& minute) {
 
 void Janyee::DateTime::SetSecond(decltype(_second) const& second) {
 	if (second < 0 || second > 59) {
-		std::string s { std::string("Value of second is illegality: ") + std::to_string(second) };
-		throw std::out_of_range(s.c_str());
+		std::wstring s { std::wstring(L"Value of second is illegality: ") + std::to_wstring(second) };
+		throw DateTimeException(s);
 	}
 	else {
 		_second = second;
