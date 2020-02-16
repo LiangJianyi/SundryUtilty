@@ -98,7 +98,7 @@ namespace Janyee
 		int GetMinute() const;
 		int GetSecond() const;
 		bool IsLeapYear() const;
-		bool IsLeapYear(int year) const;
+		static bool IsLeapYear(int year);
 		void SetLocalTimeZone(LocalTimeZone const& local);
 		LocalTimeZone GetLocalTimeZone() const;
 		std::string ToString() const;

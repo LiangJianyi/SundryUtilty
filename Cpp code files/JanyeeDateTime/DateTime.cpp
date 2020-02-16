@@ -89,7 +89,7 @@ void Janyee::DateTime::CheckErrno(errno_t err) {
 }
 
 void Janyee::DateTime::SetYear(decltype(_year) const& year) {
-	if (year < 0) {
+	if (year < 1) {
 		std::wstring s { std::wstring(L"Value of year is illegality: ") + std::to_wstring(year) };
 		throw DateTimeException(s);
 	}
@@ -99,24 +99,7 @@ void Janyee::DateTime::SetYear(decltype(_year) const& year) {
 }
 
 void Janyee::DateTime::SetMonth(decltype(_month) const& month) {
-	auto checkMonth = [&]()->bool {
-		std::map<int, int> monthPair;
-		monthPair[1] = 31;
-		monthPair[2] = IsLeapYear() ? 29 : 28;
-		monthPair[3] = 31;
-		monthPair[4] = 30;
-		monthPair[5] = 31;
-		monthPair[6] = 30;
-		monthPair[7] = 31;
-		monthPair[8] = 31;
-		monthPair[9] = 30;
-		monthPair[10] = 31;
-		monthPair[11] = 30;
-		monthPair[12] = 31;
-		return monthPair.find(month) == monthPair.end();
-	};
-
-	if (month < 0 || checkMonth()) {
+	if (month < 0 || month > 13) {
 		std::wstring s { std::wstring(L"Value of month is illegality: ") + std::to_wstring(month) };
 		throw DateTimeException(s);
 	}
@@ -126,8 +109,21 @@ void Janyee::DateTime::SetMonth(decltype(_month) const& month) {
 }
 
 void Janyee::DateTime::SetDayOfMonth(decltype(_dayOfMonth) const& dayOfMonth) {
-	if (dayOfMonth < 0) {
-		std::wstring s { std::wstring(L"Value of month is illegality: ") + std::to_wstring(dayOfMonth) };
+	std::map<int, int> monthPair;
+	monthPair[1] = 31;
+	monthPair[2] = IsLeapYear() ? 29 : 28;
+	monthPair[3] = 31;
+	monthPair[4] = 30;
+	monthPair[5] = 31;
+	monthPair[6] = 30;
+	monthPair[7] = 31;
+	monthPair[8] = 31;
+	monthPair[9] = 30;
+	monthPair[10] = 31;
+	monthPair[11] = 30;
+	monthPair[12] = 31;
+	if (dayOfMonth < 0 || dayOfMonth > monthPair.at(_month)) {
+		std::wstring s { std::wstring(L"Value of DayOfMonth is illegality: ") + std::to_wstring(dayOfMonth) };
 		throw DateTimeException(s);
 	}
 	else {
@@ -242,7 +238,7 @@ bool Janyee::DateTime::IsLeapYear() const {
 	return (_year % 4 == 0 && _year % 100 != 0) || _year % 400 == 0;
 }
 
-bool Janyee::DateTime::IsLeapYear(int year) const {
+bool Janyee::DateTime::IsLeapYear(int year) {
 	return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }
 

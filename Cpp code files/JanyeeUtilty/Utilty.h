@@ -33,22 +33,6 @@ namespace Janyee
 			return s;
 		}
 
-		static std::tuple<unsigned long long, unsigned short, unsigned short, unsigned short, unsigned short, unsigned short> RandomDate(
-			std::tuple<std::uniform_int_distribution<unsigned long long>::result_type, std::uniform_int_distribution<unsigned long long>::result_type> years,
-			std::tuple<std::uniform_int_distribution<unsigned short>::result_type, std::uniform_int_distribution<unsigned short>::result_type> months,
-			std::tuple<std::uniform_int_distribution<unsigned short>::result_type, std::uniform_int_distribution<unsigned short>::result_type> days) {
-			const unsigned int DOWN_LIMIT = 0;	// 表示随机数下限的元组成员索引
-			const unsigned int UPPER_LIMIT = 1;	// 表示随机数上限的元组成员索引
-			std::mt19937 gen { std::random_device{}() };
-			auto year = std::uniform_int_distribution<unsigned long long>(std::get<DOWN_LIMIT>(years), std::get<UPPER_LIMIT>(years))(gen);
-			auto month = std::uniform_int_distribution<unsigned short>(std::get<DOWN_LIMIT>(months), std::get<UPPER_LIMIT>(months))(gen);
-			auto day = std::uniform_int_distribution<unsigned short>(std::get<DOWN_LIMIT>(days), std::get<UPPER_LIMIT>(days))(gen);
-			auto hour = std::uniform_int_distribution<unsigned short>(0, 23)(gen);
-			auto min = std::uniform_int_distribution<unsigned short>(0, 59)(gen);
-			auto sec = std::uniform_int_distribution<unsigned short>(0, 59)(gen);
-			return std::make_tuple(year, month, day, hour, min, sec);
-		}
-
 #if Windows_Platform
 		/*
 		https://stackoverflow.com/questions/6693010/how-do-i-use-multibytetowidechar
