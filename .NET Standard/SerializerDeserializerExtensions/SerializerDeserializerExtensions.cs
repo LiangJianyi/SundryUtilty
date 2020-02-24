@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Janyee.Utilt {
+namespace Janyee.Utilty {
     public static class SerializerDeserializerExtensions {
         public static byte[] Serializer(this object _object) {
             byte[] bytes;
